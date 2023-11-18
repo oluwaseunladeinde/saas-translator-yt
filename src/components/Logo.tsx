@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import LogoImage from '@logos/chatwithanyone2.svg';
+import LogoImage from '@logos/chatwithanyone_logo.svg';
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import Image from "next/image";
 

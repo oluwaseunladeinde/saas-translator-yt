@@ -1,8 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import DemoGif from '@/images/landingPage/demo.gif';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/auth';
 
-export default function Home() {
+export default async function Home() {
+
   return (
     <main className="">
       <div className='relative isolate pt-14 '>
