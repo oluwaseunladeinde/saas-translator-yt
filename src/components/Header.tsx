@@ -4,8 +4,10 @@ import DarkModeToggle from "./DarkModeToggle"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/auth"
 import Link from "next/link"
-import { MessageSquareIcon } from "lucide-react"
+import { MessageSquareIcon, MessagesSquareIcon } from "lucide-react"
 import CreateChatButton from "./CreateChatButton"
+import UpgradeBanner from "./UpgradeBanner"
+import LanguageSelect from "./LanguageSelect"
 
 
 const Header = async () => {
@@ -19,6 +21,7 @@ const Header = async () => {
 
                 <div className="flex-1 flex items-center justify-end space-x-4">
                     {/* Language Select */}
+                    <LanguageSelect />
 
                     {session ? (
                         <>
@@ -27,7 +30,7 @@ const Header = async () => {
                                 prefetch={false}
                                 referrerPolicy="no-referrer"
                             >
-                                <MessageSquareIcon className="text-black dark:text-white" />
+                                <MessagesSquareIcon className="text-black dark:text-white" />
                             </Link>
                             <CreateChatButton />
                         </>
@@ -41,7 +44,9 @@ const Header = async () => {
                     <UserButton session={session} />
                 </div>
             </nav>
+            <UpgradeBanner />
         </header>
+
     )
 }
 

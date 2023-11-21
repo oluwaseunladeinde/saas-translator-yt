@@ -3,8 +3,18 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getFunctions } from 'firebase/functions';
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
+    apiKey: "AIzaSyDaepqYnaB3PpkBOm9EJfl4PEPq5noAxBk",
+    authDomain: "saas-translator-yt.firebaseapp.com",
+    projectId: "saas-translator-yt",
+    storageBucket: "saas-translator-yt.appspot.com",
+    messagingSenderId: "42958048398",
+    appId: "1:42958048398:web:1de4118b9524b45a968ddf"
+};
+
+// Your web app's Firebase configuration
+const firebaseConfig_env = {
     apiKey: process.env.FIREBASE_CONFIG_API_KEY,
     authDomain: process.env.FIREBASE_CONFIG_AUTH_DOMAIN,
     projectId: process.env.FIREBASE_CONFIG_PROJECT_ID,

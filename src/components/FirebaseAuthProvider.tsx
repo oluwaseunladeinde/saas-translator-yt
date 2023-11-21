@@ -1,5 +1,4 @@
-'use client'
-
+'use client';
 import { signInWithCustomToken } from "@firebase/auth";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
