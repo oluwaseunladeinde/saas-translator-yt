@@ -18,6 +18,11 @@ const nextConfig = {
                 hostname: 'st2.depositphotos.com',
                 pathname: '**',
             },
+            {
+                protocol: 'https',
+                hostname: 'i.pravatar.cc',
+                pathname: '**',
+            },
         ],
     },
 }
