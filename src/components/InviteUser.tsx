@@ -85,7 +85,6 @@ const InviteUser = ({ chatId }: { chatId: string }) => {
                 title: "Free plan the limit exceeded",
                 description: "You've exceeded the FREE plan limit of 3 users in a single chat. Upgrade to PRO for unlimited users to chat messages!",
                 variant: "destructive",
-                duration: 5000,
                 action: (
                     <ToastAction
                         altText='Upgrade'
@@ -97,6 +96,50 @@ const InviteUser = ({ chatId }: { chatId: string }) => {
             });
             return;
         }
+
+        const querySnapshot = await getDocs(getuserByEmailRef(values.email));
+        if (querySnapshot.empty) {
+            toast({
+                title: "User not found",
+                description: "Please enter a valid email address of a registered user OR send teh invitation once they have signed up.",
+                variant: "destructive",
+                action: (
+                    <ToastAction
+                        altText='Close'
+                        onClick={() => setOpenInviteLink(false)}
+                    >
+                        Close
+                    </ToastAction>
+                )
+            });
+            return;
+        } else {
+
+            // get the user data returned from the datastore
+            const user = querySnapshot.docs.map((doc) => doc.data())[0];
+
+            // add the user tyo the list of chat memberss
+            await setDoc(addChatRef(chatId, user.id), {
+                userId: user.id,
+                email: user.email!,
+                chatId: chatId,
+                isAdmin: false,
+                timestamp: serverTimestamp(),
+                image: user.image || "",
+            }).then(() => {
+                setOpen(false);
+                toast({
+                    title: "Added to chat",
+                    description: "The user has been added to the chat!",
+                    className: "bg-green-600 text-white",
+                    duration: 3000,
+                });
+
+                setOpenInviteLink(true);
+            })
+        }
+
+        form.reset();
     }
 
     return (
@@ -147,7 +190,7 @@ const InviteUser = ({ chatId }: { chatId: string }) => {
 
                 <ShareLink
                     isOpen={openInviteLink}
-                    //setIsOpen={setOpenInviteLink}
+                    setIsOpen={setOpenInviteLink}
                     chatId={chatId}
                 />
             </>
