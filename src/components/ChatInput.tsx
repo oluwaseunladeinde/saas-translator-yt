@@ -66,6 +66,7 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
             return;
         }
 
+        // create the user data payload
         const userToStore: User = {
             id: session.user.id!,
             name: session.user.name!,
@@ -73,6 +74,7 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
             image: session.user.image || "",
         };
 
+        // add the chat message to the datastore
         addDoc(messagesRef(chatId), {
             input: inputCopy,
             timestamp: serverTimestamp(),

@@ -26,6 +26,8 @@ const DeleteChat = ({ chatId }: { chatId: string }) => {
     const [open, setOpen] = useState(false);
     const subscription = useSubscriptionStore((state) => state.subscription);
 
+    if (!session?.user.id) return;
+
     const handleDelete = async () => {
         toast({
             title: "Deleting Chat",
@@ -33,6 +35,32 @@ const DeleteChat = ({ chatId }: { chatId: string }) => {
             duration: 5000,
         });
         console.log("Deleting :: ", chatId);
+
+        await fetch("/api/chat/delete", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                chatId: chatId,
+            }),
+        }).then((res) => {
+            toast({
+                title: "Deleted successfully",
+                description: "The chat has been deleted!",
+                className: "bg-green-600 text-white",
+                duration: 3000,
+            })
+            router.replace('/chat');
+        }).catch((err) => {
+            console.error(err.message);
+            toast({
+                title: "Failed to delete chat",
+                description: "The chat could not be deleted!",
+                duration: 3000,
+                variant: "destructive"
+            });
+        }).finally(() => setOpen(false));
     };
 
     return (

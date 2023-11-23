@@ -15,7 +15,7 @@ const CheckoutButton = () => {
     const subscription = useSubscriptionStore((state) => state.subscription);
 
     const isLoadingSubscription = subscription === undefined;
-    const isSubscribed = true; //subscription?.status === "active" && subscription?.role === "pro"
+    const isSubscribed = subscription?.status === "active" && subscription?.role === "pro"
 
     // TODO: revamp the issubscrobed condition
 
@@ -43,6 +43,16 @@ const CheckoutButton = () => {
     return (
         <div className='flex flex-col space-y-2'>
             {/* susbscribed? */}
+            {isSubscribed && (
+                <>
+                    <hr className="mt-5" />
+                    <p className="pt-5 text-center text-xs text-indigo-600">
+                        You are subscribed to PRO
+                    </p>
+                </>
+            )}
+
+
             <div
                 className='mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold 
                 leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2

@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+## Project Goal
+
+Translate chat conversations to connect users across language barriers in real time. 
+
 ## Getting Started
 
 First, run the development server:

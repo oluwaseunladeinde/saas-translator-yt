@@ -1,4 +1,5 @@
 import ChatList from "@/components/ChatList";
+import ChatPermissionError from "@/components/ChatPermissionError";
 
 type Props = {
     params: {};
@@ -10,6 +11,11 @@ type Props = {
 const ChatsPage = ({ searchParams: { error } }: Props) => {
     return (
         <div>
+            {error && (
+                <div className="m2">
+                    <ChatPermissionError />
+                </div>
+            )}
             <ChatList />
         </div>
     )
